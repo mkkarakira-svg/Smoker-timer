@@ -4,7 +4,7 @@ import android.content.*
 import android.media.RingtoneManager
 import android.os.Build
 class AlarmReceiver: BroadcastReceiver(){
- override fun onReceive(c:Context,i:Intent){
+ override fun onReceive(c:Context,i:Intent){if(c.getSharedPreferences("smoke",Context.MODE_PRIVATE).getBoolean("muted",false))return;
   val nm=c.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
   val sound=RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
   if(Build.VERSION.SDK_INT>=26)nm.createNotificationChannel(NotificationChannel("smoke_alarm_v2","Smoker Timer Alarm",NotificationManager.IMPORTANCE_HIGH).apply{enableVibration(true);vibrationPattern=longArrayOf(0,700,300,700,300,1200);setSound(sound,android.media.AudioAttributes.Builder().setUsage(android.media.AudioAttributes.USAGE_ALARM).build())})
