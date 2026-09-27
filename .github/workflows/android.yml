@@ -12,6 +12,11 @@ jobs:
      with: { distribution: temurin, java-version: '17' }
    - uses: gradle/actions/setup-gradle@v4
      with: { gradle-version: '8.9' }
+   - name: Restore stable debug signing key
+     uses: actions/cache@v4
+     with:
+      path: ~/.android/debug.keystore
+      key: smoker-timer-debug-signing-v1
    - run: gradle assembleDebug
    - uses: actions/upload-artifact@v4
      with:
