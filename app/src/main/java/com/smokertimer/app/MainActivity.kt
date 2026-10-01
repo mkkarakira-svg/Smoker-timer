@@ -16,7 +16,7 @@ class MainActivity: Activity(){
   val cal=Calendar.getInstance().apply{timeInMillis=ms;add(Calendar.HOUR_OF_DAY,-4)}
   return SimpleDateFormat("yyyyMMdd",Locale.US).format(cal.time)
  }
- fun dayTimes(key:String):List<Long>=(prefs.getString("times_"+key,"")?:"").split(",").mapNotNull{it.toLongOrNull()}
+ fun dayTimes(key:String):List<Long> = (prefs.getString("times_"+key,"") ?: "").split(",").mapNotNull { value -> value.toLongOrNull() }
  fun currentDayCount():Int=dayTimes(smokingDayKey()).size
  fun currentMonthTotal():Int{
   val mk=smokingDayKey().take(6);var total=0
